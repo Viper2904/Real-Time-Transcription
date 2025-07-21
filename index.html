@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whisper Transcription</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button {
+            background-color: #0077ff;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005fcc;
+        }
+
+        .transcript-box {
+            background: #f2f7ff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            text-align: left;
+            border-left: 5px solid #0077ff;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #888;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Upload Your Audio</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="audio" accept=".mp3,.wav,.m4a" required>
+            <button type="submit">Transcribe</button>
+        </form>
+
+
+        {% if transcription %}
+            <div class="transcript-box">
+                <h3>📝 Transcription:</h3>
+                <p>{{ transcription }}</p>
+            </div>
+        {% endif %}
+
+        <p class="note">Supports only WAV files. Max 30s recommended for fast results.</p>
+    </div>
+</body>
+</html>
